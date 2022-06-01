@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<properties resource="db.properties"></properties>
+	<plugins>
+		<plugin interceptor="net.xzh.interceptor.OptimisticLocker">
+			<property name="versionColumn" value="version" /> <!-- 数据库的列名 -->
+			<property name="versionField" value="version" /> <!-- java字段名 -->
+		</plugin>
+		<plugin interceptor="net.xzh.interceptor.FieldEncryptInterceptor" />
+		<plugin interceptor="net.xzh.interceptor.SqlMonitorPlugin" />
+	</plugins>
+	<!-- 设置一个默认的连接环境信息，支持多数据源 -->
+	<environments default="development">
+		<!-- 连接环境信息，取一个唯一的编号 -->
+		<environment id="development">
+			<!-- mybatis使用的jdbc事务管理方式 -->
+			<transactionManager type="jdbc">
+			</transactionManager>
+			<!-- mybatis使用连接池方式来获取链接 -->
+			<dataSource type="pooled">
+				<!-- 配置与数据库交互的四个属性 -->
+				<property name="driver" value="${jdbc.driver}" />
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<package name="net.xzh.mbg.mapper" />
+	</mappers>
+</configuration>

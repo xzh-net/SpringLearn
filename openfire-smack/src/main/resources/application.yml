@@ -1,0 +1,8 @@
+server:
+   port: 8080
+openfire: 
+   server: 2021openfire.vjsp.net
+   port: 5223
+   resource: test
+   username: bd2260b6873d43fcb8685838385c6cdc
+   password: bd2260b6873d43fcb8685838385c6cdc
