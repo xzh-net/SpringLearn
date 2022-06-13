@@ -29,7 +29,10 @@ import org.thymeleaf.templatemode.TemplateMode;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 
 import net.xzh.annotation.UserParam;
-
+/**
+ * 相当于springmvc.xml文件
+ *
+ */
 @Configuration
 @EnableWebMvc
 @ComponentScan("net.xzh.controller")

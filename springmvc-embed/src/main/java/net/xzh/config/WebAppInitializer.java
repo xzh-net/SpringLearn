@@ -29,7 +29,6 @@ public class WebAppInitializer implements WebApplicationInitializer {
 	// SPI "你"=>这里指的是spring
 	public void onStartup(ServletContext servletContext) {
 //		log.info("META-INF/services/org.springframework.web.SpringServletContainerInitializer");
-
 		// 字符集过滤器
 		FilterRegistration.Dynamic encodingFilter = servletContext.addFilter("encodingFilter",
 				CharacterEncodingFilter.class);
@@ -41,21 +40,19 @@ public class WebAppInitializer implements WebApplicationInitializer {
 //		FilterRegistration.Dynamic sysFilter = servletContext.addFilter("sysFilter", SysFilter.class);
 //		sysFilter.addMappingForUrlPatterns(null, false, "/*");
 
-		// 实施这类WebApplicationContext接受注明@Configuration的类
-		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-		// 配置注释的类
-		rootContext.register(RootConfig.class);
-		servletContext.addListener(new ContextLoaderListener(rootContext));
+		// applicationContext.xml注册
+		AnnotationConfigWebApplicationContext applicationConfig = new AnnotationConfigWebApplicationContext();
+		applicationConfig.register(ApplicationConfig.class);
+		servletContext.addListener(new ContextLoaderListener(applicationConfig));
 		
-		// 同上
+		// springmvc.xml注册
 		AnnotationConfigWebApplicationContext webContext = new AnnotationConfigWebApplicationContext();
 		webContext.register(WebConfig.class);
+		
 		// 声明SpringMVC核心控制器
 		DispatcherServlet dispatcher = new DispatcherServlet(webContext);
-		
 		dispatcher.setThrowExceptionIfNoHandlerFound(true);
-		// DispatcherServlet添加到servletContext（上下文）
-		ServletRegistration.Dynamic registration = servletContext.addServlet("dispatcher", dispatcher);
+		ServletRegistration.Dynamic registration = servletContext.addServlet("dispatcher", dispatcher);// DispatcherServlet添加到servletContext（上下文）
 		registration.setLoadOnStartup(1);
 		// 映射路径
 		registration.addMapping("/");
