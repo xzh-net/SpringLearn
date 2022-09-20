@@ -22,7 +22,46 @@
     </repositories>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.apache.pulsar/pulsar-functions-api -->
+        <dependency>
+            <groupId>org.apache.pulsar</groupId>
+            <artifactId>pulsar-client-all</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+
+        <!--Fink 和 Pulsar 集成相关的包-->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-java</artifactId>
+            <version>1.13.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-table-common</artifactId>
+            <version>1.13.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-streaming-java_2.11</artifactId>
+            <version>1.13.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-clients_2.11</artifactId>
+            <version>1.13.1</version>
+        </dependency>
+        <!--Pulsar 与 flink 整合包-->
+        <dependency>
+            <groupId>io.streamnative.connectors</groupId>
+            <artifactId>pulsar-flink-connector_2.11</artifactId>
+            <version>1.13.1.5-rc1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.pulsar</groupId>
+                    <artifactId>pulsar-client-all</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- 自定义function -->
         <dependency>
             <groupId>org.apache.pulsar</groupId>
             <artifactId>pulsar-functions-api</artifactId>
