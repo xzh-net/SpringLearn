@@ -2,6 +2,8 @@
 
 ## 1. function
 
+net.xzh.pulsar.functions.FormatDateFunction
+
 ## 2. connector
 
 
