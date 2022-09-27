@@ -30,22 +30,17 @@ public class MyInterceptor implements Interceptor {
     // 单个事件拦截器
     public Event intercept(Event event) {
         // 对事件做处理，事件包含消息体和头部
-        // 如果host来源是192.168.85.132，对事件做一个抛弃处理
-        if (event.getHeaders().get("host").equals("127.0.0.1")) {
-            logger.info("消息来源是localhost，抛弃事件");
-            return null;
-        }
         //1.获取事件中的头信息
         Map<String, String> headers = event.getHeaders();
         //2.获取事件中的 body 信息
         String body = new String(event.getBody());
         //3.根据 body 中是否有"atguigu"来决定添加怎样的头信息
-        if (body.contains("我是个大盗贼")) {
+        if (body.contains("xzh")) {
             //4.添加头信息
-            headers.put("form", "xzh");
+            headers.put("from", "xzh");
         } else {
             //4.添加头信息
-            headers.put("form", "other");
+            headers.put("from", "other");
         }
         return event;
     }
