@@ -1,6 +1,6 @@
 # Pulsar 2.10.1
 
-## 1. function
+## 1. 自定义function
 
 net.xzh.pulsar.functions.FormatDateFunction
 
