@@ -4,7 +4,7 @@
 
 net.xzh.pulsar.functions.FormatDateFunction
 
-## 2. connector
+## 2. Connector
 
 
 ### 2.1 Flink从Pulsar中读取消息的操作
