@@ -243,9 +243,9 @@ public interface UmsMenuMapper extends BaseMapper<UmsMenu> {
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.tiny.modules.ums.mapper.UmsMenuMapper">
+<mapper namespace="net.xzh.mall.tiny.modules.ums.mapper.UmsMenuMapper">
 
-    <select id="getMenuList" resultType="com.macro.mall.tiny.modules.ums.model.UmsMenu">
+    <select id="getMenuList" resultType="net.xzh.mall.tiny.modules.ums.model.UmsMenu">
         SELECT
             m.id id,
             m.parent_id parentId,
