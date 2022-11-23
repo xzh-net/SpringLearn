@@ -1,12 +1,5 @@
 # mall-tiny
 
-<p>
-    <a href="#公众号"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%85%AC%E4%BC%97%E5%8F%B7-macrozheng-blue.svg" alt="公众号"></a>
-    <a href="#公众号"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E4%BA%A4%E6%B5%81-%E5%BE%AE%E4%BF%A1%E7%BE%A4-2BA245.svg" alt="交流"></a>    
-    <a href="https://github.com/macrozheng/mall"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%90%8E%E5%8F%B0%E9%A1%B9%E7%9B%AE-mall-blue.svg" alt="后台项目"></a>
-    <a href="https://github.com/macrozheng/mall-admin-web"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE-mall--admin--web-green.svg" alt="前端项目"></a>
-</p>
-
 ## 简介
 
 mall-tiny是一款基于SpringBoot+MyBatis-Plus的快速开发脚手架，拥有完整的权限管理功能，可对接Vue前端，开箱即用。
@@ -36,17 +29,16 @@ mall-tiny项目可无缝对接`mall-admin-web`前端项目，秒变权限管理�
 
 ## 数据库表结构
 
-![](http://img.macrozheng.com/mall/project/mall_tiny_start_01.png)
+化繁为简，仅保留了权限管理功能相关的9张表，方便自由定制；
 
-- 化繁为简，仅保留了权限管理功能相关的9张表，方便自由定制；
-
-- 数据库源文件地址：https://github.com/macrozheng/mall-tiny/blob/master/sql/mall_tiny.sql
 
 ## 使用流程
 
 ### 环境搭建
 
-简化依赖服务，只需安装最常用的MySql和Redis服务即可，服务安装具体参考[mall在Windows环境下的部署](https://www.macrozheng.com/mall/deploy/mall_deploy_windows.html) ，数据库中需要导入`mall_tiny.sql`脚本。
+http://127.0.0.1:8080/swagger-ui
+
+admin/123456
 
 ### 开发规约
 
@@ -271,22 +263,6 @@ public interface UmsMenuMapper extends BaseMapper<UmsMenu> {
 </mapper>
 ```
 
-### 项目部署
-
-mall-tiny已经集成了Docker插件，可以打包成Docker镜像来部署，具体参考：[使用Maven插件为SpringBoot应用构建Docker镜像](https://www.macrozheng.com/project/maven_docker_fabric8.html)
-
-安装好MySQL和Redis服务后，直接使用如下命令运行即可。
-
-```bash
-docker run -p 8080:8080 --name mall-tiny \
---link mysql:db \
---link redis:redis \
--e 'spring.profiles.active'=prod \
--v /etc/localtime:/etc/localtime \
--v /mydata/app/mall-tiny/logs:/var/logs \
--d mall-tiny/mall-tiny:1.0.0-SNAPSHOT
-```
-
 ### 其他说明
 
 #### SpringSecurity相关
@@ -353,17 +329,3 @@ public class UmsAdminController {
     }
 }
 ```
-
-## 公众号
-
-学习不走弯路，关注公众号「**macrozheng**」，回复「**学习路线**」，获取mall项目专属学习路线！
-
-加微信群交流，公众号后台回复「**加群**」即可。
-
-![公众号图片](http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/banner/qrcode_for_macrozheng_258.jpg)
-
-## 许可证
-
-[Apache License 2.0](https://github.com/macrozheng/mall-tiny/blob/master/LICENSE)
-
-Copyright (c) 2018-2022 macrozheng
