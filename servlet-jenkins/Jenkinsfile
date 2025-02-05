@@ -1,0 +1,42 @@
+pipeline {
+   agent any
+
+   stages {
+      stage('代码拉取') {
+         steps {
+            checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '282b054d-d655-471e-96af-e7231c2386e3', url: 'git@172.17.17.50:vjsp/web_demo.git']]])
+         }
+      }
+	  stage('code checking') {
+         steps {
+            script {
+                 //引入SonarQubeScanner工具
+                scannerHome = tool 'sonarqube-scanner'
+            }
+            //引入SonarQube的服务器环境
+            withSonarQubeEnv('sonarqube6.7.4') {
+                sh "${scannerHome}/bin/sonar-scanner"
+            }
+         }
+      }  
+      stage('编译构建') {
+         steps {
+            sh 'mvn clean package'
+         }
+      }
+      stage('项目部署') {
+         steps {
+            deploy adapters: [tomcat8(credentialsId: 'f303f062-1ef0-4a1c-969b-972bb57244a2', path: '', url: 'http://172.17.17.80:8080')], contextPath: '/cms003S', war: 'target/*.war'
+         }
+      }
+   }
+   post {
+         always {
+            emailext(
+               subject: '构建通知：${PROJECT_NAME} - Build # ${BUILD_NUMBER} - ${BUILD_STATUS}!',
+               body: '${FILE,path="email.html"}',
+               to: 'xcg992224@163.com'
+            )
+         }
+   }
+}
